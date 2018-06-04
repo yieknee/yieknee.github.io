@@ -11,6 +11,11 @@
   grid-template-rows:    repeat(auto-fill, minmax(250px, 300px));
 }
 
+header {
+  text-align: center;
+  padding: 10px;
+  font-size: 1.5em;
+}
 
 /* CSS Button */
 

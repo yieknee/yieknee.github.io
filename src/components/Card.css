@@ -1,5 +1,5 @@
-div.card {
-  background-color: yellow;
+.card {
+  background-color: #FECE2B;
   height: 250px;
   display: grid;
   grid-template-columns: 1fr 20px;

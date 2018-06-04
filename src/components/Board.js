@@ -8,7 +8,6 @@ import NewCardForm from './NewCardForm';
 
 //const BOARD_STATES = ['DISPLAY', 'ADD', 'DELETE'];
 
-const URL = 'http://localhost:3000/boards/';
 
 class Board extends Component {
   constructor() {
@@ -33,7 +32,7 @@ class Board extends Component {
       message: 'Loading Cards',
     });
 
-    axios.get(`${URL}${this.props.boardId}/cards`)
+    axios.get(`${this.props.url}${this.props.boardId}/cards`)
     .then((response) => {
       const cards = [];
       response.data.forEach((card) => {
@@ -120,7 +119,7 @@ class Board extends Component {
     this.setState({
       cards,
     });
-    axios.delete(`${URL}${this.props.boardId}/cards/${cardId}`)
+    axios.delete(`${this.props.url}${this.props.boardId}/cards/${cardId}`)
     .then(() => {
       this.setState({
         message: 'Card deleted',
@@ -144,7 +143,7 @@ class Board extends Component {
       mode: 'DISPLAY',
     });
 
-    axios.post(`${URL}${this.props.boardId}/cards`, card)
+    axios.post(`${this.props.url}${this.props.boardId}/cards`, card)
     .then((response) => {
       console.log(response);
       console.log(response.data);
@@ -206,6 +205,7 @@ class Board extends Component {
 
 Board.propTypes = {
   boardId: PropTypes.number.isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 export default Board;
