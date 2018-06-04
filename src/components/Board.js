@@ -8,7 +8,7 @@ import NewCardForm from './NewCardForm';
 
 //const BOARD_STATES = ['DISPLAY', 'ADD', 'DELETE'];
 
-const URL = 'http://localhost:3000/boards';
+const URL = 'http://localhost:3000/boards/';
 
 class Board extends Component {
   constructor() {
@@ -17,6 +17,7 @@ class Board extends Component {
     this.state = {
       mode: 'DISPLAY',
       cards: [],
+      message: '',
     };
   }
 
@@ -28,13 +29,29 @@ class Board extends Component {
   }
 
   componentDidMount() {
+    this.setState({
+      message: 'Loading Cards',
+    });
+
     axios.get(`${URL}${this.props.boardId}/cards`)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((response) => {
-        console.log(`Error: ${response.data}`);
+    .then((response) => {
+      const cards = [];
+      response.data.forEach((card) => {
+        cards.push({
+          title: card.card.title,
+          content: card.card.content,
+          image_url: card.card.image_url,
+          id: card.card.id,
+        });
       });
+      this.setState({
+        cards,
+        message: '',
+      });
+    })
+    .catch((response) => {
+      console.log(`Error: ${response.data}`);
+    });
   }
 
   getCards = () => {
@@ -45,10 +62,78 @@ class Board extends Component {
           title={card.title}
           content={card.content}
           image_url={card.image_url}
+          deleteCardCallback={this.deleteCard}
+          id={card.id}
           />
       );
     });
   }
+
+
+
+  renderFieldValidationErrors = (field, errorArray) => {
+    const list = errorArray.map((message, index) => {
+      console.log(`Error: ${message}`);
+      return (
+        <li key={`${field}-${index}`}>
+          {message}
+        </li>
+      )
+    });
+    return (
+      <div>
+        <strong>{field}:</strong>
+        <ul className="validation-errors">
+          {list}
+        </ul>
+      </div>
+    );
+  }
+
+  renderValidationErrors = (responseData) => {
+    if (responseData['errors']) {
+
+      const validationErrors = responseData['errors']
+      const errorList = Object.keys(validationErrors).map((field) => {
+        return (
+          <div key={`${field}`}>
+            {this.renderFieldValidationErrors(field, validationErrors[field])}
+          </div>
+        );
+      });
+      return (
+        <div>
+          {errorList}
+        </div>
+      );
+    }
+    else {
+      return (
+        <div />
+      )
+    }
+  }
+
+  deleteCard = (cardId) => {
+    console.log(cardId);
+    const cards = this.state.cards.filter((card) => card.id !== parseInt(cardId))
+    this.setState({
+      cards,
+    });
+    axios.delete(`${URL}${this.props.boardId}/cards/${cardId}`)
+    .then(() => {
+      this.setState({
+        message: 'Card deleted',
+      })
+    })
+    .catch((error) => {
+      console.log(error);
+      this.setState({
+        message: 'Cannot delete card',
+      });
+    });
+  }
+
 
   addCard = (card) => {
     const cards = this.state.cards;
@@ -56,6 +141,25 @@ class Board extends Component {
 
     this.setState({
       cards,
+      mode: 'DISPLAY',
+    });
+
+    axios.post(`${URL}${this.props.boardId}/cards`, card)
+    .then((response) => {
+      console.log(response);
+      console.log(response.data);
+    })
+    .catch((error) => {
+
+      const message = (
+        <div>
+          <p>Cannot Add the Card</p>
+          {this.renderValidationErrors( error.response.data)}
+        </div>
+      )
+      this.setState({
+        message,
+      });
     });
   }
 
@@ -64,23 +168,38 @@ class Board extends Component {
       mode: 'DISPLAY',
     });
   }
+  displayMessage = () => {
+    if (this.state.message === '') {
+      return (
+        <div />
+      );
+    }
+    return (
+      <div>
+        <h3>{this.state.message}</h3>
+      </div>
+    );
+  }
 
   render() {
     return (
-      <main className="board">
-        {this.getCards()}
+      <div>
+        <header>{this.state.message}</header>
 
-        <NewCardForm
-          addCardCallback={this.addCard}
-          hideFormCallback={this.hideCard}
-          visibility={this.state.mode === 'ADD' ? 'shown-modal' : 'hidden-modal' }
-          />
+        <main className="board">
+          {this.getCards()}
 
-        <a href="#" className="float" onClick={this.onAddClick}>
+          <NewCardForm
+            addCardCallback={this.addCard}
+            hideFormCallback={this.hideCard}
+            visibility={this.state.mode === 'ADD' ? 'shown-modal' : 'hidden-modal' }
+            />
+
+          <a href="#" className="float" onClick={this.onAddClick}>
             <i className="fa fa-plus my-float"></i>
           </a>
-      </main>
-
+        </main>
+      </div>
     );
   }
 }

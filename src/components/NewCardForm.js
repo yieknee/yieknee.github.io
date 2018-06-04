@@ -11,13 +11,14 @@ class NewCardForm extends Component {
       title: '',
       content: '',
       image_url: '',
+      errorMessages: '',
     };
   }
 
   validators = {
     title: /([^\s]+)/,
     content: /([^\s]+)/,
-    image_url: /^$|^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/,
+    image_url: /^$|^(https?:\/\/)?([\da-z.-]+).([a-z.]{2,6})([\/\w .-]*)*\/?$/,
   }
 
   onFieldChange = (event) => {
@@ -47,6 +48,11 @@ class NewCardForm extends Component {
         content: this.state.content,
         image_url: this.state.image_url,
       });
+      this.setState({
+        title: '',
+        content: '',
+        image_url: '',
+      });
     }
 
   }
@@ -59,21 +65,20 @@ class NewCardForm extends Component {
         <div className="modal-content">
           <span onClick={this.props.hideFormCallback} className="close">&times;</span>
           <h2>Add New Card..</h2>
-          <form onSubmit={this.onSubmit} >
-            <div>
+          <div className="validationErrors">
+            {this.state.errorMessages}
+          </div>
+          <div >
+            <form onSubmit={this.onSubmit} className="new-student-form" >
               <label htmlFor="title">Title</label>
               <input name="title" onChange={this.onFieldChange} value={this.state.title} />
-            </div>
-            <div>
               <label htmlFor="content">Content</label>
               <textarea name="content" onChange={this.onFieldChange} value={this.state.content} />
-            </div>
-            <div>
               <label htmlFor="image_url">Image URL</label>
               <input name="image_url" onChange={this.onFieldChange} value={this.state.image_url} />
-            </div>
-            <button type="submit">Add Card</button>
-          </form>
+              <button type="submit">Add Card</button>
+            </form>
+          </div>
         </div>
 
       </div>

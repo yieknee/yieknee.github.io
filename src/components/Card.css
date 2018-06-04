@@ -1,4 +1,28 @@
 div.card {
   background-color: yellow;
   height: 250px;
+  display: grid;
+  grid-template-columns: 1fr 20px;
+  padding: 10px;
+}
+
+.card .title {
+  grid-column-end: span 1;
+}
+
+.card .delete {
+  grid-column-start: 2;
+  grid-row-start: 1;
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.card .content {
+  grid-column: 1 / span 2
+}
+
+.centered {
+  display: block;
+  text-align: center;
 }
