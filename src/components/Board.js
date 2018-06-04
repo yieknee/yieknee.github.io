@@ -37,8 +37,7 @@ class Board extends Component {
       const cards = [];
       response.data.forEach((card) => {
         cards.push({
-          title: card.card.title,
-          content: card.card.content,
+          text: card.card.text,
           image_url: card.card.image_url,
           id: card.card.id,
         });
@@ -58,8 +57,7 @@ class Board extends Component {
       return (
         <Card
           key={index}
-          title={card.title}
-          content={card.content}
+          text={card.text}
           image_url={card.image_url}
           deleteCardCallback={this.deleteCard}
           id={card.id}
@@ -115,7 +113,7 @@ class Board extends Component {
 
   deleteCard = (cardId) => {
     console.log(cardId);
-    const cards = this.state.cards.filter((card) => card.id !== parseInt(cardId))
+    const cards = this.state.cards.filter((card) => card.id !== parseInt(cardId, 10))
     this.setState({
       cards,
     });
@@ -136,6 +134,7 @@ class Board extends Component {
 
   addCard = (card) => {
     const cards = this.state.cards;
+    card.id = 'pending';
     cards.push(card);
 
     this.setState({
@@ -146,7 +145,14 @@ class Board extends Component {
     axios.post(`${this.props.url}${this.props.boardId}/cards`, card)
     .then((response) => {
       console.log(response);
-      console.log(response.data);
+      cards.forEach((card) => {
+        if (card.id === 'pending' && card.text === response.data.card.text) {
+          card.id = response.data.card.id;
+          this.setState({
+            cards,
+          });
+        }
+      });
     })
     .catch((error) => {
 
@@ -194,9 +200,9 @@ class Board extends Component {
             visibility={this.state.mode === 'ADD' ? 'shown-modal' : 'hidden-modal' }
             />
 
-          <a href="#" className="float" onClick={this.onAddClick}>
+          <button  className="float" onClick={this.onAddClick}>
             <i className="fa fa-plus my-float"></i>
-          </a>
+          </button>
         </main>
       </div>
     );

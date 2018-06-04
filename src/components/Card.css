@@ -1,5 +1,6 @@
 .card {
   background-color: #FECE2B;
+  border-radius: 20px;
   height: 250px;
   display: grid;
   grid-template-columns: 1fr 20px;
@@ -22,6 +23,12 @@
   grid-column: 1 / span 2
 }
 
+.card-image {
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
 .centered {
   display: block;
   text-align: center;

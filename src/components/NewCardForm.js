@@ -48,6 +48,7 @@ class NewCardForm extends Component {
         content: this.state.content,
         image_url: this.state.image_url,
       });
+      console.log('All valid');
       this.setState({
         title: '',
         content: '',

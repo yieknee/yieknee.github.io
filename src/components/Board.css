@@ -5,3 +5,8 @@ main {
 .validation-errors {
   margin-left: 20px;
 }
+
+.float i {
+  margin-top: 3px;
+  font-size: 2em;
+}
