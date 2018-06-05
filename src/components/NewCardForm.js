@@ -28,9 +28,6 @@ class NewCardForm extends Component {
   }
 
   fieldValid = (fieldName) => {
-    console.log(`FieldName: ${fieldName}`);
-    console.log(`valid: ${this.validators[fieldName].test(this.state[fieldName])}`);
-    console.log(`Field Value: ${this.state[fieldName]}`);
     return this.validators[fieldName].test(this.state[fieldName]);
   }
 
@@ -55,7 +52,6 @@ class NewCardForm extends Component {
   }
 
   render() {
-    console.log(`modal ${this.props.visibility}`);
     return (
       <div id="myModal" className={`modal ${this.props.visibility}`}>
 

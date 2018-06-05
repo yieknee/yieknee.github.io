@@ -48,7 +48,9 @@ class Board extends Component {
       });
     })
     .catch((response) => {
-      console.log(`Error: ${response.data}`);
+      this.setState({
+        message: `Error: ${response.data}`,
+      })
     });
   }
 
@@ -70,7 +72,6 @@ class Board extends Component {
 
   renderFieldValidationErrors = (field, errorArray) => {
     const list = errorArray.map((message, index) => {
-      console.log(`Error: ${message}`);
       return (
         <li key={`${field}-${index}`}>
           {message}
@@ -112,7 +113,6 @@ class Board extends Component {
   }
 
   deleteCard = (cardId) => {
-    console.log(cardId);
     const cards = this.state.cards.filter((card) => card.id !== parseInt(cardId, 10))
     this.setState({
       cards,
@@ -123,8 +123,7 @@ class Board extends Component {
         message: 'Card deleted',
       })
     })
-    .catch((error) => {
-      console.log(error);
+    .catch(() => {
       this.setState({
         message: 'Cannot delete card',
       });
@@ -133,20 +132,11 @@ class Board extends Component {
 
 
   addCard = (card) => {
-    const cards = this.state.cards;
-    card.id = 'pending';
-    cards.push(card);
-
-    this.setState({
-      cards,
-      mode: 'DISPLAY',
-    });
 
     axios.post(`${this.props.url}${this.props.boardId}/cards`, card)
     .then((response) => {
-      console.log(response);
       cards.forEach((card) => {
-        if (card.id === 'pending' && card.text === response.data.card.text) {
+        if (card.id === -1 && card.text === response.data.card.text) {
           card.id = response.data.card.id;
           this.setState({
             cards,
@@ -155,7 +145,6 @@ class Board extends Component {
       });
     })
     .catch((error) => {
-
       const message = (
         <div>
           <p>Cannot Add the Card</p>
@@ -166,6 +155,15 @@ class Board extends Component {
         message,
       });
     });
+    const cards = this.state.cards;
+    card.id = -1;
+    cards.push(card);
+
+    this.setState({
+      cards,
+      mode: 'DISPLAY',
+    });
+
   }
 
   hideCard = () => {
