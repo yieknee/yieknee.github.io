@@ -8,16 +8,14 @@ class NewCardForm extends Component {
     super();
 
     this.state = {
-      title: '',
-      content: '',
+      text: '',
       image_url: '',
       errorMessages: '',
     };
   }
 
   validators = {
-    title: /([^\s]+)/,
-    content: /([^\s]+)/,
+    text: /([^\s]+)/,
     image_url: /^$|^(https?:\/\/)?([\da-z.-]+).([a-z.]{2,6})([\/\w .-]*)*\/?$/,
   }
 
@@ -30,28 +28,26 @@ class NewCardForm extends Component {
   }
 
   fieldValid = (fieldName) => {
+    console.log(`FieldName: ${fieldName}`);
+    console.log(`valid: ${this.validators[fieldName].test(this.state[fieldName])}`);
+    console.log(`Field Value: ${this.state[fieldName]}`);
     return this.validators[fieldName].test(this.state[fieldName]);
   }
 
   onSubmit = (event) => {
     event.preventDefault();
-    let allValid = true;
-    ['title', 'content', 'image_url'].forEach((field) => {
-      if (!this.fieldValid(field)) {
-        allValid = false;
-      }
-    });
+    let valid = false;
+    if (this.fieldValid('text') || this.state.image_url.length > 0 && this.fieldValid('image_url')) {
+      valid = true;
+    }
 
-    if (allValid) {
+    if (valid) {
       this.props.addCardCallback({
-        title: this.state.title,
-        content: this.state.content,
+        text: this.state.text,
         image_url: this.state.image_url,
       });
-      console.log('All valid');
       this.setState({
-        title: '',
-        content: '',
+        text: '',
         image_url: '',
       });
     }
@@ -71,10 +67,8 @@ class NewCardForm extends Component {
           </div>
           <div >
             <form onSubmit={this.onSubmit} className="new-student-form" >
-              <label htmlFor="title">Title</label>
-              <input name="title" onChange={this.onFieldChange} value={this.state.title} />
-              <label htmlFor="content">Content</label>
-              <textarea name="content" onChange={this.onFieldChange} value={this.state.content} />
+              <label htmlFor="text">Text</label>
+              <textarea name="text" onChange={this.onFieldChange} value={this.state.text} />
               <label htmlFor="image_url">Image URL</label>
               <input name="image_url" onChange={this.onFieldChange} value={this.state.image_url} />
               <button type="submit">Add Card</button>
@@ -90,6 +84,7 @@ class NewCardForm extends Component {
 NewCardForm.propTypes = {
   visibility: PropTypes.string.isRequired,
   addCardCallback: PropTypes.func.isRequired,
+  hideFormCallback: PropTypes.func.isRequired,
 }
 
 
