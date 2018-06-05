@@ -62,7 +62,7 @@ class Board extends Component {
           text={card.text}
           image_url={card.image_url}
           deleteCardCallback={this.deleteCard}
-          id={card.id}
+          id={card.id === undefined ? -1: card.id}
           />
       );
     });
@@ -136,7 +136,7 @@ class Board extends Component {
     axios.post(`${this.props.url}${this.props.boardId}/cards`, card)
     .then((response) => {
       cards.forEach((card) => {
-        if (card.id === -1 && card.text === response.data.card.text) {
+        if (card.id === undefined && card.text === response.data.card.text) {
           card.id = response.data.card.id;
           this.setState({
             cards,
@@ -156,7 +156,6 @@ class Board extends Component {
       });
     });
     const cards = this.state.cards;
-    card.id = -1;
     cards.push(card);
 
     this.setState({
