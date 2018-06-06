@@ -14,17 +14,9 @@ class Board extends Component {
     super();
 
     this.state = {
-      mode: 'DISPLAY',
       cards: [],
       message: '',
     };
-  }
-
-  onAddClick = (event) => {
-    event.preventDefault();
-    this.setState({
-      mode: 'ADD',
-    });
   }
 
   componentDidMount() {
@@ -187,19 +179,15 @@ class Board extends Component {
     return (
       <div>
         <header>{this.state.message}</header>
+          <NewCardForm
+            addCardCallback={this.addCard}
+            hideFormCallback={this.hideCard}
+            />
 
         <main className="board">
           {this.getCards()}
 
-          <NewCardForm
-            addCardCallback={this.addCard}
-            hideFormCallback={this.hideCard}
-            visibility={this.state.mode === 'ADD' ? 'shown-modal' : 'hidden-modal' }
-            />
 
-          <button  className="float" onClick={this.onAddClick}>
-            <i className="fa fa-plus my-float"></i>
-          </button>
         </main>
       </div>
     );

@@ -53,10 +53,9 @@ class NewCardForm extends Component {
 
   render() {
     return (
-      <div id="myModal" className={`modal ${this.props.visibility}`}>
+      <div id="add-card-form" className={`form ${this.props.visibility}`}>
 
         <div className="modal-content">
-          <span onClick={this.props.hideFormCallback} className="close">&times;</span>
           <h2>Add New Card..</h2>
           <div className="validationErrors">
             {this.state.errorMessages}
@@ -80,7 +79,6 @@ class NewCardForm extends Component {
 NewCardForm.propTypes = {
   visibility: PropTypes.string.isRequired,
   addCardCallback: PropTypes.func.isRequired,
-  hideFormCallback: PropTypes.func.isRequired,
 }
 
 
