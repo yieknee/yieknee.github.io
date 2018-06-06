@@ -5,22 +5,23 @@
   margin: 0.5rem;
   flex-basis: 19%;
   flex-shrink: 1;
+  display: grid;
 }
 
 .card .title {
   grid-column-end: span 1;
+  margin: 5px;
 }
 
 .card .delete {
-  grid-column-start: 2;
-  grid-row-start: 1;
   color: #aaa;
   font-size: 28px;
   font-weight: bold;
-}
-
-.card .content {
-  grid-column: 1 / span 2
+  padding: 2px;
+  margin-right: 5px;
+  margin-left: auto;
+  grid-column-start: 2;
+  grid-row-start: 1;
 }
 
 .card-image {
@@ -32,4 +33,8 @@
 .centered {
   display: block;
   text-align: center;
+}
+
+h2.centered {
+  display: inline;
 }
