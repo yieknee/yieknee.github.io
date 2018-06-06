@@ -13,9 +13,9 @@ This project should enable you to demonstrate learning in:
 
 ## Project Baseline
 
-The API is hosted at **https://inspiration-bard.herokuapp.com/**.  You can find the API documentation and source code hosted [here](https://github.com/AdaGold/inspiration-board-api).
+The API is hosted at **https://inspiration-board.herokuapp.com/**.  You can find the API documentation and source code hosted [here](https://github.com/AdaGold/inspiration-board-api).
 
-You should spend time exploring the API with Postman to get a feel for how to make requests and how the data is returned.  
+You should spend time exploring the API with Postman to get a feel for how to make requests and how the data is returned.
 
 ## Wave 1
 - Build a Card component to display a card's data
