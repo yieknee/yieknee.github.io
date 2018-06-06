@@ -135,13 +135,13 @@ class Board extends Component {
 
     axios.post(`${this.props.url}${this.props.boardId}/cards`, card)
     .then((response) => {
-      cards.forEach((card) => {
-        if (card.id === undefined && card.text === response.data.card.text) {
-          card.id = response.data.card.id;
-          this.setState({
-            cards,
-          });
-        }
+      const newCard = cards.find((cardElement) => {
+        return cardElement.id === undefined &&
+        cardElement.text === response.data.card.text;
+      });
+      newCard.id = response.data.card.id;
+      this.setState({
+        cards,
       });
     })
     .catch((error) => {
