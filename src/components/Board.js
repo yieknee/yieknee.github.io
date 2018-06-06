@@ -135,16 +135,16 @@ class Board extends Component {
 
     axios.post(`${this.props.url}${this.props.boardId}/cards`, card)
     .then((response) => {
-      const newCard = cards.find((cardElement) => {
-        return cardElement.id === undefined &&
-        cardElement.text === response.data.card.text;
-      });
-      newCard.id = response.data.card.id;
+      console.log(response);
+      card.id = response.data.card.id;
+
       this.setState({
         cards,
       });
     })
     .catch((error) => {
+      console.log(error);
+
       const message = (
         <div>
           <p>Cannot Add the Card</p>
