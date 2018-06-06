@@ -2,9 +2,9 @@
   background-color: #FECE2B;
   border-radius: 20px;
   height: 250px;
-  display: grid;
-  grid-template-columns: 1fr 20px;
-  padding: 10px;
+  margin: 0.5rem;
+  flex-basis: 19%;
+  flex-shrink: 1;
 }
 
 .card .title {
