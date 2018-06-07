@@ -6,9 +6,6 @@ import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
 
-//const BOARD_STATES = ['DISPLAY', 'ADD', 'DELETE'];
-
-
 class Board extends Component {
   constructor() {
     super();
@@ -24,13 +21,13 @@ class Board extends Component {
       message: 'Loading Cards',
     });
 
-    axios.get(`${this.props.url}${this.props.boardId}/cards`)
+    axios.get(`${this.props.url}${this.props.boardName}/cards`)
     .then((response) => {
       const cards = [];
       response.data.forEach((card) => {
         cards.push({
           text: card.card.text,
-          image_url: card.card.image_url,
+          emoji: card.card.emoji,
           id: card.card.id,
         });
       });
@@ -52,7 +49,7 @@ class Board extends Component {
         <Card
           key={index}
           text={card.text}
-          image_url={card.image_url}
+          emoji={card.emoji}
           deleteCardCallback={this.deleteCard}
           id={card.id === undefined ? -1: card.id}
           />
@@ -109,7 +106,7 @@ class Board extends Component {
     this.setState({
       cards,
     });
-    axios.delete(`${this.props.url}${this.props.boardId}/cards/${cardId}`)
+    axios.delete(`${this.props.url}${this.props.boardName}/cards/${cardId}`)
     .then(() => {
       this.setState({
         message: 'Card deleted',
@@ -125,7 +122,7 @@ class Board extends Component {
 
   addCard = (card) => {
 
-    axios.post(`${this.props.url}${this.props.boardId}/cards`, card)
+    axios.post(`${this.props.url}${this.props.boardName}/cards`, card)
     .then((response) => {
       console.log(response);
       card.id = response.data.card.id;
@@ -195,7 +192,7 @@ class Board extends Component {
 }
 
 Board.propTypes = {
-  boardId: PropTypes.number.isRequired,
+  boardName: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
 };
 

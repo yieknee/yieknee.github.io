@@ -9,8 +9,10 @@ class App extends Component {
         <header>
           <h1>Ada&apos;s Inspiration Board</h1>
         </header>
-        <Board url="https://inspiration-board.herokuapp.com/boards/"
- boardId={1} />
+        <Board
+          url="https://inspiration-board.herokuapp.com/boards/"
+          boardName={`Ada-Lovelace`}
+          />
       </div>
     );
   }

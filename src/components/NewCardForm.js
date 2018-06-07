@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import emoji from 'emoji-dictionary';
 import './NewCardForm.css';
 
 
@@ -9,14 +10,9 @@ class NewCardForm extends Component {
 
     this.state = {
       text: '',
-      image_url: '',
+      emoji: '',
       errorMessages: '',
     };
-  }
-
-  validators = {
-    text: /([^\s]+)/,
-    image_url: /^$|^(https?:\/\/)?([\da-z.-]+).([a-z.]{2,6})([\/\w .-]*)*\/?$/,
   }
 
   onFieldChange = (event) => {
@@ -27,28 +23,29 @@ class NewCardForm extends Component {
     this.setState(updatedState);
   }
 
-  fieldValid = (fieldName) => {
-    return this.validators[fieldName].test(this.state[fieldName]);
-  }
-
   onSubmit = (event) => {
     event.preventDefault();
-    let valid = false;
-    if (this.fieldValid('text') || this.state.image_url.length > 0 && this.fieldValid('image_url')) {
-      valid = true;
-    }
-
-    if (valid) {
+    if (this.state.text.length > 0 || this.state.emoji !== "none" ) {
       this.props.addCardCallback({
         text: this.state.text,
-        image_url: this.state.image_url,
+        emoji: this.state.emoji,
       });
       this.setState({
         text: '',
-        image_url: '',
+        emoji: '',
       });
     }
+  }
 
+  generateEmojis = () => {
+    const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_eyes_cat", "dog"]
+
+    const emojiOptions = EMOJI_LIST.map((emojiText) => {
+      return (
+        <option key={emojiText} value={emojiText}>{emojiText.length > 0 ? emoji.getUnicode(emojiText): ""}</option>
+      );
+    });
+    return emojiOptions;
   }
 
   render() {
@@ -64,8 +61,10 @@ class NewCardForm extends Component {
             <form onSubmit={this.onSubmit} className="new-student-form" >
               <label htmlFor="text">Text</label>
               <textarea name="text" onChange={this.onFieldChange} value={this.state.text} />
-              <label htmlFor="image_url">Image URL</label>
-              <input name="image_url" onChange={this.onFieldChange} value={this.state.image_url} />
+              <label htmlFor="emoji">Emoji</label>
+              <select name="emoji" onChange={this.onFieldChange} value={this.state.emoji}>
+                {this.generateEmojis()}
+              </select>
               <button type="submit">Add Card</button>
             </form>
           </div>
@@ -77,7 +76,6 @@ class NewCardForm extends Component {
 }
 
 NewCardForm.propTypes = {
-  visibility: PropTypes.string.isRequired,
   addCardCallback: PropTypes.func.isRequired,
 }
 

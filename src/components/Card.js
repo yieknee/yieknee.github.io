@@ -1,21 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import emoji from 'emoji-dictionary';
+
 import './Card.css';
 
 class Card extends Component {
-
-  showImage = () => {
-    if (this.props.image_url) {
-      return (
-          <img className="card-image" src={this.props.image_url} alt="Inspiration" />
-      );
-    } else {
-    return (
-      <div />
-    );
-   }
-  }
-
   render() {
     return (
       <div className="card">
@@ -24,15 +13,15 @@ class Card extends Component {
           data-card-id={this.props.id}
           onClick={(event) => this.props.deleteCardCallback(event.target.dataset.cardId)}
           className="delete">×</span>
-        {this.showImage()}
+        <p className="emoji">{this.props.emoji && this.props.emoji.length > 0 ? emoji.getUnicode(this.props.emoji): ""}</p>
       </div>
     )
   }
 }
 
 Card.propTypes = {
-  text: PropTypes.string.isRequired,
-  image_url: PropTypes.string,
+  text: PropTypes.string,
+  emoji: PropTypes.string,
   id: PropTypes.number.isRequired,
   deleteCardCallback: PropTypes.func.isRequired,
 };
