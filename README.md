@@ -12,6 +12,7 @@ This is a [Stage 2](https://github.com/Ada-Developers-Academy/pedagogy/blob/mast
 This project should enable you to demonstrate learning in:
 - Using an API within a React app
 - Designing a React application with multiple interacting components
+- Creating test files with snapshot tests
 
 ## Project Baseline
 
@@ -23,16 +24,15 @@ You should spend time exploring the API with Postman to get a feel for how to ma
 
 Create `Card` and `Board` components and use the provided hardcoded data to populate the board.
 
-- Build a Card component to display a single inspirational quote and optional emoji.
+- Build the Card component to display a single inspirational quote and optional emoji.
 - Build a `Board` component which renders a list of Cards from hardcoded data
-
 
 ## Wave 2
 
 In wave 2 you will add API functionality.
 - Modify the `Board` component to use `axios` to retrieve card data from the end point:
   - `https://inspiration-board.herokuapp.com/boards/<YOUR-NAME>/cards`
-    - Note that you should put your name in place of `<YOUR-NAME>`
+  - Note that you should put your name in place of `<YOUR-NAME>`
 - Create a shallow snapshot tests for the `Card` and `Board` component
 
 ## Wave 3
