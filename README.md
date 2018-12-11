@@ -6,7 +6,8 @@ In this project you will use a provided API to provide an inspiration board fron
 
 ![Adas inspiration Board](./images/board.jpg)
 
-This is a [Stage 2](https://github.com/Ada-Developers-Academy/pedagogy/blob/master/rule-of-three.md#stage-2) individual project. You will be submitting a PR for this project at the end.
+This is a [Stage 2](https://github.com/Ada-Developers-Academy/pedagogy/blob/master/rule-of-three.md#stage-2) individual project. You will be submitting a PR for this project at the end by **Monday December 17th**.
+
 
 ## Learning Goals
 This project should enable you to demonstrate learning in:
