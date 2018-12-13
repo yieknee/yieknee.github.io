@@ -21,6 +21,8 @@ The API is hosted at **https://inspiration-board.herokuapp.com/**.  You can find
 
 You should spend time exploring the API with Postman to get a feel for how to make requests and how the data is returned.
 
+One task you should definitely complete: create a board for yourself, with a name that will be unique for you.
+
 ### A Note About Styles
 
 We have provided styles for you in `.css` files. Styling is not a major learning goal for this project, so please limit the amount of time you spend on styling.
@@ -56,7 +58,7 @@ Note there is a package installed called [`emoji-dictionary`](https://github.com
 ## Wave 2
 
 In wave 2 you will add API functionality.
-- Modify the `Board` component to use `axios` to retrieve card data from the end point:
+- Modify the `Board` component to use `axios` to retrieve card data from the end point, using the board you created in the baseline:
   - `https://inspiration-board.herokuapp.com/boards/<YOUR-NAME>/cards`
   - Note that you should put your name in place of `<YOUR-NAME>`
 - Create a shallow snapshot tests for the `Card` and `NewCardForm` components
