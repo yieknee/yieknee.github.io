@@ -61,11 +61,11 @@ In wave 2 you will add API functionality.
 - Modify the `Board` component to use `axios` to retrieve card data from the end point, using the board you created in the baseline:
   - `https://inspiration-board.herokuapp.com/boards/<YOUR-NAME>/cards`
   - Note that you should put your name in place of `<YOUR-NAME>`
-- Create a shallow snapshot tests for the `Card` and `NewCardForm` components
 
 ## Wave 3
 - Add a delete button on each card which will remove a card from the `Board` and delete it from the API.
 - Create a `NewCardForm` component which will add new cards to the board and trigger POST requests to the API to create a card on the API.
+- Create a shallow snapshot tests for the `Card` and `NewCardForm` components
 
 ## Optionals
 Possible optional enhancements include:
