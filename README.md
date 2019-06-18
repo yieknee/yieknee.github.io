@@ -1,13 +1,15 @@
 # Inspiration Board
 
+## At a Glance
+
+- Individual, [stage 2](https://github.com/Ada-Developers-Academy/pedagogy/blob/master/rule-of-three.md#stage-2) project
+- Due before class, *DATE HERE*
+
 ## Introduction
 
-In this project you will use a provided API to provide an inspiration board front-end.  You will build an application which displays a set of cards containing inspirational quotes and emoji images, like the board in the Ada common room.  Users should be able to add and remove cards.
+In the common Ada space, we have an Inspiration Board that asks people to take notes of encouragement. Similarly, it's fairly easy to leave notes of encouragement!
 
 ![Adas inspiration Board](./images/board.jpg)
-
-This is a [Stage 2](https://github.com/Ada-Developers-Academy/pedagogy/blob/master/rule-of-three.md#stage-2) individual project. You will be submitting a PR for this project at the end by **<DUE DATE>**.
-
 
 ## Learning Goals
 This project should enable you to demonstrate learning in:
@@ -15,13 +17,29 @@ This project should enable you to demonstrate learning in:
 - Designing a React application with multiple interacting components
 - Creating test files with snapshot tests
 
-## Project Baseline
+## Objective
+
+Your objective is to build an application which displays a set of cards containing encouraging notes and emoji images, like the board in the Ada common room.
+
+Your project will be a front-end in React that uses a provided API to interface with a backend.
+
+The users should be able to access different, unique boards. Each unique board has their own set of unique notes. Users should be able to add and remove cards to specific boards.
+
+## Getting Started
+
+This project provides some scaffolding. To get started, make sure that you do the following:
+
+- Fork and clone, install your dependencies, and run the server
+- Read through the details of the Inspiration Board API (section below)
+- Read through the details of the provided CSS styles
+- Read through the provided code
+- Read through the setup requirements
+
+### The Inspiration Board API
 
 The API is hosted at **https://inspiration-board.herokuapp.com/**.  You can find the API documentation and source code hosted [here](https://github.com/AdaGold/inspiration-board-api).
 
 You should spend time exploring the API with Postman to get a feel for how to make requests and how the data is returned.
-
-One task you should definitely complete: create a board for yourself, with a name that will be unique for you.
 
 ### A Note About Styles
 
@@ -46,30 +64,45 @@ In this case, there is some "block" (section, idea, maybe component) named `new-
 
 Again, please limit the time you spend on styling, and reach out often and frequently.
 
-## Wave 1
+## Setup Requirements
+
+Create a board for yourself, with a name that will be unique for you. This will be your own board to do development and manual-testing on. To do so, do the following:
+
+1. Pick your board's name. Examples include your first name, like `dee`, or your first and last name combined, like `dee-del-rosario`.
+1. Use the Inspiration Board API documentation to create a specific board with a specific board name, and how to read from that specific board name.
+1. Once you've confirmed that your specific board name works as an endpoint, open up in your project files `App.js`. In this file, find and observe the following code:
+    ```javascript
+    <Board
+          url="https://inspiration-board.herokuapp.com/boards/"
+          boardName={`Ada-Lovelace`}
+          />
+    ```
+1. Replace the value of `boardName` with your unique board name.
+1. Use the props `url` and `boardName` throughout your project to create your API endpoints as you work through the project.
+
+## Implementation Requirements
+
+### Wave 1
 
 Create `Card` and `Board` components and use the provided hardcoded data to populate the board.
 
-- Build the Card component to display a single inspirational quote and optional emoji.
+- Build the Card component to display a single inspirational quote and optional emoji
 - Build a `Board` component which renders a list of Cards from hardcoded data
 
 Note there is a package installed called [`emoji-dictionary`](https://github.com/IonicaBizau/emoji-dictionary) which you can elect to use to display the emojis listed.
 
-## Wave 2
+### Wave 2
 
 In wave 2 you will add API functionality.
-- Modify the `Board` component to use `axios` to retrieve card data from the end point, using the board you created in the baseline:
-  - `https://inspiration-board.herokuapp.com/boards/<YOUR-NAME>/cards`
-  - Note that you should put your name in place of `<YOUR-NAME>`
+- Modify the `Board` component to use `axios` to retrieve card data from the end point, using the board endpoint you configured in the setup requirements.
 
-## Wave 3
+### Wave 3
 - Add a delete button on each card which will remove a card from the `Board` and delete it from the API.
 - Create a `NewCardForm` component which will add new cards to the board and trigger POST requests to the API to create a card on the API.
 - Create a shallow snapshot tests for the `Card` and `NewCardForm` components
 
-## Optionals
-Possible optional enhancements include:
-- Allowing the user to switch between bards with a drop-down list
+### Optional Enhancements
+- Allow the user to switch between boards with a drop-down list
 - Add user interaction testing
 - Allow the `NewCardForm` to post to different boards on the API.
 - Try to deploy the app on Github pages [(nice tutorial, here!)](https://codeburst.io/deploy-react-to-github-pages-to-create-an-amazing-website-42d8b09cd4d)
