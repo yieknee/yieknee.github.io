@@ -7,25 +7,13 @@ import Card from './Card';
 import NewCardForm from './NewCardForm';
 import CARD_DATA from '../data/card-data.json';
 
-class Board extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      cards: [],
-    };
-  }
-
-  render() {
-    return (
-      <div>
-        Board
-      </div>
-    )
-  }
-
-}
-
+const Board = () => {
+  return (
+    <div>
+      Board
+    </div>
+  )
+};
 Board.propTypes = {
 
 };
