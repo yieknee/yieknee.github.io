@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState,  useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
@@ -7,33 +7,27 @@ import Card from './Card';
 import NewCardForm from './NewCardForm';
 import CARD_DATA from '../data/card-data.json';
 
-const cards = [
-  {
-    "card": {
-      "id": 4733,
-      "text": "You are smart!",
-      "emoji": "heart"
-    }
-  },
-  {
-    "card": {
-      "id": 4731,
-      "text": "Yor are kind!",
-      "emoji": "heart"
-    }
-  },
-  {
-    "card": {
-      "id": 4515,
-      "text": "You will get through this!",
-      "emoji": "clap"
-    }
-  }
-]
-
 const Board = (props) => { 
+  const API_CARD_URL = `${props.url}${props.bordName}/cards`
+
+  const [cardList, setCardList] = useState([])
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  useEffect(()=>{
+    axios.get(API_CARD_URL)
+      .then((response) => {
+        console.log(response.data)
+        const apiCardList = response.data;
+        setCardList(apiCardList);
+      })
+      .catch((error) => {
+        setErrorMessage(error.message);
+        console.log(error.message);
+      });
+  }, [])
   
-  const cardComponents = cards.map((card) => {
+  console.log(cardList)
+  const cardComponents = cardList.map((card) => {
     console.log(card.card.id)
     return(
       <Card
@@ -43,7 +37,6 @@ const Board = (props) => {
         emoji = {card.card.emoji}
       />
     )
-  
   })
 
   return (
@@ -53,18 +46,18 @@ const Board = (props) => {
   )
 };
 
-// Board.propTypes = {
-//   url: PropTypes.string.isRequired,
-//   boardName: PropTypes.string.isRequired,
-//   cards: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       card: PropTypes.shape({
-//         id: PropTypes.integer.isRequired,
-//         text: PropTypes.string.isRequired,
-//         emoji: PropTypes.string.isRequired
-//       })
-//     })
-//   )
-// };
+Board.propTypes = {
+  url: PropTypes.string.isRequired,
+  boardName: PropTypes.string.isRequired,
+  cards: PropTypes.arrayOf(
+    PropTypes.shape({
+      card: PropTypes.shape({
+        id: PropTypes.integer,
+        text: PropTypes.string.isRequired,
+        emoji: PropTypes.string.isRequired
+      })
+    })
+  )
+};
 
 export default Board;

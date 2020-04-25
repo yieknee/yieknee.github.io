@@ -13,16 +13,15 @@ const Card = (props) => {
     <div className="card">
       <section className="card__content">
         <p className="card__content-text">{props.text}</p>
-        <p className="card__content-emoji">{emoji.getUnicode(props.emoji)}</p>
+        {props.emoji?<p className="card__content-emoji">{emoji.getUnicode(props.emoji)}</p> : ""}
       </section>
     </div>
-    
-    
   )
 }
 
 Card.propTypes = {
-
+  text: PropTypes.string.isRequired,
+  emoji: PropTypes.string.isRequired
 };
 
 export default Card;
