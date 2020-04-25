@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState} from 'react';
 import PropTypes from 'prop-types';
 import emoji from 'emoji-dictionary';
 import './NewCardForm.css';
@@ -7,22 +7,43 @@ const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_
 
 
 const NewCardForm = (props) => {
+  const [formFields, setFormFields] = useState({
+    text: "",
+    emoji: "",
+  })
 
+  const onInputChange = (event) => {
+    console.log(event.target.value)
+    const newFormFild = {...formFields}
+    newFormFild[event.target.name] = event.target.value
+    setFormFields(newFormFild)
+  }
+
+  const onFormSubmit = (event) =>{
+    event.preventDefault()
+
+    props.onSubmitCallback(formFields)
+    setFormFields({
+      text: "",
+      emoji: "",
+    })
+  }
+  console.log(formFields)
   return(
-    <form className="new-card-form">
+    <form className="new-card-form" onSubmit={onFormSubmit} >
       <div className ="new-card-form__header">
         <label className="new-card-form__form-label">Input your message</label>
         <input className = "new-card-form__form-textarea" 
           name="text"
-          // value={}
-          // onChange = {onInputChange}
+          value={formFields.text}
+          onChange = {onInputChange}
           type="text"
         />
       </div>
       <div className ="new-card-form__header">
           <p>
              <label className="new-card-form__form-select">Select Emoji</label>
-             <select id = "myList">
+             <select name = "emoji" onChange ={onInputChange}>
                <option value = {EMOJI_LIST[0]}>{emoji.getUnicode(EMOJI_LIST[0])}</option>
                <option value = {EMOJI_LIST[1]}>{emoji.getUnicode(EMOJI_LIST[1])}</option>
                <option value = {EMOJI_LIST[2]}>{emoji.getUnicode(EMOJI_LIST[2])}</option>

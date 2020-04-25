@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { } from 'react';
 import PropTypes from 'prop-types';
 import emoji from 'emoji-dictionary';
 
@@ -19,8 +19,8 @@ const Card = (props) => {
 }
 
 Card.propTypes = {
-  text: PropTypes.string.isRequired,
-  emoji: PropTypes.string.isRequired
+  text: PropTypes.string,
+  emoji: PropTypes.string
 };
 
 export default Card;
