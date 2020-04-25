@@ -3,29 +3,29 @@ import './App.css';
 import Board from './components/Board';
 
 const App = () => {
-  const cards = [
-    {
-      "card": {
-        "id": 4733,
-        "text": "You are smart!",
-        "emoji": "'heart'"
-      }
-    },
-    {
-      "card": {
-        "id": 4731,
-        "text": "Yor are kind!",
-        "emoji": "heart"
-      }
-    },
-    {
-      "card": {
-        "id": 4515,
-        "text": "You will get through this!",
-        "emoji": "clap"
-      }
-    }
-  ]
+  // const cards = [
+  //   {
+  //     "card": {
+  //       "id": 4733,
+  //       "text": "You are smart!",
+  //       "emoji": "'heart'"
+  //     }
+  //   },
+  //   {
+  //     "card": {
+  //       "id": 4731,
+  //       "text": "Yor are kind!",
+  //       "emoji": "heart"
+  //     }
+  //   },
+  //   {
+  //     "card": {
+  //       "id": 4515,
+  //       "text": "You will get through this!",
+  //       "emoji": "clap"
+  //     }
+  //   }
+  // ]
 
   return (
     <section>
@@ -35,7 +35,7 @@ const App = () => {
       <Board
         url="https://inspiration-board.herokuapp.com/boards/"
         boardName={`Jeta-Yieni`}
-        cards = {cards}
+        // cards = {cards}
       />
     </section>
   );
