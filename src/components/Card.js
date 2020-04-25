@@ -7,17 +7,13 @@ import './Card.css';
 
 const Card = (props) => {
 
-  
-
-  console.log(props)
-  console.log(props.emoji)
   return (
     <div className="card">
       <section className="card__content">
         <p className="card__content-text">{props.text}</p>
         {props.emoji?<p className="card__content-emoji">{emoji.getUnicode(props.emoji)}</p> : ""}
       </section>
-      <button className="card__delete" onClick={}>Delete</button>
+      <button className="card__delete" onClick = {() => props.onClickCallback(props.id)}>Delete</button>
     </div>
   )
 }
