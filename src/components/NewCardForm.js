@@ -5,7 +5,6 @@ import './NewCardForm.css';
 
 const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_eyes_cat", "dog"]
 
-
 const NewCardForm = (props) => {
   const [formFields, setFormFields] = useState({
     text: "",
@@ -13,7 +12,6 @@ const NewCardForm = (props) => {
   })
 
   const onInputChange = (event) => {
-    console.log(event.target.value)
     const newFormFild = {...formFields}
     newFormFild[event.target.name] = event.target.value
     setFormFields(newFormFild)
@@ -28,7 +26,7 @@ const NewCardForm = (props) => {
       emoji: "",
     })
   }
-  console.log(formFields)
+
   return(
     <form className="new-card-form" onSubmit={onFormSubmit} >
       <div className ="new-card-form__header">
@@ -38,6 +36,7 @@ const NewCardForm = (props) => {
           value={formFields.text}
           onChange = {onInputChange}
           type="text"
+        
         />
       </div>
       <div className ="new-card-form__header">

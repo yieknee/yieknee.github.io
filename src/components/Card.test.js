@@ -1,19 +1,20 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react'
-import Board from './Board';
+import Card from './Card';
 
-describe('Board', () => {
+describe('Card', () => {
   test('that it matches the existing snapshot', () => {
-    // Arrange-Act
+    
     const { asFragment } = render(
-      <Board
-      url="https://inspiration-board.herokuapp.com/boards/"
-      boardName={`Jeta-Yieni`}
+      <Card
+      key = {10}
+      id = {10}
+      text = {"You can do it!"}
+      emoji = {"heart"}
+      onClickCallback = {() => {}}
     />
     );
-
-    // Assert
     expect(asFragment()).toMatchSnapshot();
     cleanup();
   });
-});
+});  

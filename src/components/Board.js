@@ -1,7 +1,6 @@
 import React, { useState,  useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-
 import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
@@ -63,11 +62,10 @@ const Board = (props) => {
       });
   }, [API_CARD_URL])
 
-  console.log(cardList)
   const cardComponents = cardList.map((card) => {
     return(
       <Card
-        key = {console.log(card.card.id)}
+        key = {card.card.id}
         id = {card.card.id}
         text = {card.card.text}
         emoji = {card.card.emoji}
