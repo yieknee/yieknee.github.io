@@ -3,6 +3,30 @@ import './App.css';
 import Board from './components/Board';
 
 const App = () => {
+  const cards = [
+    {
+      "card": {
+        "id": 4733,
+        "text": "You are smart!",
+        "emoji": "'heart'"
+      }
+    },
+    {
+      "card": {
+        "id": 4731,
+        "text": "Yor are kind!",
+        "emoji": "heart"
+      }
+    },
+    {
+      "card": {
+        "id": 4515,
+        "text": "You will get through this!",
+        "emoji": "clap"
+      }
+    }
+  ]
+
   return (
     <section>
       <header className="header">
@@ -10,7 +34,8 @@ const App = () => {
       </header>
       <Board
         url="https://inspiration-board.herokuapp.com/boards/"
-        boardName={`Ada-Lovelace`}
+        boardName={`Jeta-Yieni`}
+        cards = {cards}
       />
     </section>
   );
