@@ -42,7 +42,7 @@ const NewCardForm = (props) => {
       <div className ="new-card-form__header">
           <p>
              <label className="new-card-form__form-select">Select Emoji</label>
-             <select name = "emoji" onChange ={onInputChange}>
+             <select className="new-card-form__form-select" name = "emoji" onChange ={onInputChange}>
                <option value = {EMOJI_LIST[0]}>{emoji.getUnicode(EMOJI_LIST[0])}</option>
                <option value = {EMOJI_LIST[1]}>{emoji.getUnicode(EMOJI_LIST[1])}</option>
                <option value = {EMOJI_LIST[2]}>{emoji.getUnicode(EMOJI_LIST[2])}</option>
@@ -59,5 +59,9 @@ const NewCardForm = (props) => {
   </form>
   )
 } 
+
+NewCardForm.propTypes = {
+  onSubmitCallback: PropTypes.func.isRequired,
+};
 
 export default NewCardForm;

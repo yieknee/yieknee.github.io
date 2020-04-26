@@ -75,7 +75,7 @@ const Board = (props) => {
   })
 
   return (
-    <div>
+    <div className="board">
       {cardComponents}
       <NewCardForm onSubmitCallback ={addCard}/>
     </div>
